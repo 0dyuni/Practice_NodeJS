@@ -6,15 +6,19 @@ const app = express();
 const port = 3000;
 //const bodyParser = require('body-parser');
 const { User } = require("./models/User");
+//dev,prod 환경 구분을 위해서 만든 key를 가져옴
+const config = require('./config/key');
 
 //application/x-www-form-urlencoded 이런 데이터는 분석해서 가져온다.
 //app.use(bodyParser.urlencoded({extended: true}));
+
 //application/json 분석해서 쓸 수 있게 가져온다.
 app.use(express.json());
 //app.use(bodyParser.json());
+
 //몽구스 연결, 에러표시,연결표시
 const mongoose = require('mongoose');
-mongoose.connect('mongodb+srv://0dyuni:ww2015**@boilerplate.8ewlc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',)
+mongoose.connect(config.mongoURI,)
     .then(() => console.log('MongoDB Connected'))
     .catch(err => console.log(err))
 
